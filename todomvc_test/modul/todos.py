@@ -5,9 +5,9 @@ todos = browser.all('#todo-list>li')
 new_todo = browser.element('#new-todo')
 
 
-def visit():
+def visit(text):
     browser.config.hold_browser_open = True
-    browser.open('https://todomvc4tasj.herokuapp.com/')
+    browser.open(text)
     browser.should(have.js_returned(True, "return $._data($('#clear-completed')[0], 'events').hasOwnProperty('click')"))
 
 
