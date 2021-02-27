@@ -1,7 +1,7 @@
 from todomvc_test.modul import todos
 
 
-def test_add_complete():
+def test_todos_life_cycle():
     todos.visit('https://todomvc4tasj.herokuapp.com/')
 
     todos.add('a', 'b', 'c')
@@ -18,4 +18,4 @@ def test_add_complete():
     todos.delete('c')
     todos.should_be('a')
 
-test_add_complete()
+
