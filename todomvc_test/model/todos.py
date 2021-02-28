@@ -3,14 +3,14 @@ from selene.support.shared import browser
 
 todos = browser.all('#todo-list>li')
 new_todo = browser.element('#new-todo')
-is_todo_js_loaded = ("return $._data($('#clear-completed')[0], "
+is_js_loaded = ("return $._data($('#clear-completed')[0], "
                      "'events').hasOwnProperty('click')")
 
 
-def visit(text: str):
+def visit():
     browser.config.hold_browser_open = True
-    browser.open(text)
-    browser.should(have.js_returned(True, is_todo_js_loaded))
+    browser.open('https://todomvc4tasj.herokuapp.com/')
+    browser.should(have.js_returned(True, is_js_loaded))
 
 
 def add(*args: str):

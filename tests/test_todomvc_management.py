@@ -2,7 +2,7 @@ from todomvc_test.modul import todos
 
 
 def test_todos_life_cycle():
-    todos.visit('https://todomvc4tasj.herokuapp.com/')
+    todos.visit()
 
     todos.add('a', 'b', 'c')
     todos.should_be('a', 'b', 'c')
