@@ -1,4 +1,4 @@
-from todomvc_test.model import todos
+from tests.pages import todos
 
 
 def test_todos_life_cycle():
@@ -17,3 +17,4 @@ def test_todos_life_cycle():
 
     todos.delete('c')
     todos.should_be('a')
+test_todos_life_cycle()

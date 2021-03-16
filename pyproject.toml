@@ -2,7 +2,7 @@
 name = "todomvc-test"
 version = "0.1.0"
 description = ""
-authors = ["Maxellius <maxell741852963@gmail.com>>"]
+authors = ["Maxellius <maxell741852963@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
