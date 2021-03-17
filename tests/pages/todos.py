@@ -2,32 +2,32 @@ from selene import have
 from selene.support.shared import browser
 
 
-be_class_completed = have.css_class('completed')
+have_class_completed = have.css_class('completed')
 
 
-class todomvc:
+class Todomvc:
     def __init__(self):
         self.todo_list = browser.all('#todo-list>li')
-        self.new_todo = browser.element('#new-todo')
 
     def visit(self):
         browser.open('https://todomvc4tasj.herokuapp.com/')
-        script = "return 'click' in $._data($('#clear-completed')[0],'events')"
-        browser.wait_until(have.js_returned(True, script))
+        is_js_loaded = ("return $._data($('#clear-completed')[0], "
+                     "'events').hasOwnProperty('click')")
+        browser.should(have.js_returned(True, is_js_loaded))
         return self
 
-    def visit_with(self, *texts: str):
+    def visit_with(self, *texts):
         self.visit()
         for text in texts:
-            self.new_todo.type(text).press_enter()
+            self.add(text)
         return self
 
-    def add(self, *texts: str):
+    def add(self, *texts):
         for text in texts:
-            self.new_todo.type(text).press_enter()
+            browser.element('#new-todo').type(text).press_enter()
         return self
 
-    def should_be(self, *texts: str):
+    def should_be_completed(self, *texts):
         self.todo_list.should(have.exact_texts(*texts))
         return self
 
@@ -59,7 +59,7 @@ class todomvc:
 
     def toggle(self, text: str):
         self.todo_list.element_by(have.exact_text(text))\
-            .element(".toggle").click()
+            .element('.toggle').click()
         return self
 
     def toggle_all(self):
@@ -67,12 +67,12 @@ class todomvc:
         return self
 
     def list_should_have_completed(self, *texts: str):
-        self.todo_list.filtered_by(be_class_completed)\
+        self.todo_list.filtered_by(have_class_completed)\
             .should(have.exact_texts(*texts))
         return self
 
     def list_should_have_active(self, *texts: str):
-        self.todo_list.filtered_by(be_class_completed.not_)\
+        self.todo_list.filtered_by(have_class_completed.not_)\
             .should(have.exact_texts(*texts))
         return self
 
@@ -82,5 +82,5 @@ class todomvc:
 
     def delete(self, text: str):
         self.todo_list.element_by(have.exact_text(text)).hover()\
-            .element(".destroy").click()
+            .element('.destroy').click()
         return self

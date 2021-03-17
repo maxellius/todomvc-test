@@ -104,8 +104,20 @@ def test_clear_completed():
 
 def test_delete():
     todos.visit_with('a', 'b', 'c')
+    todos.should_have_items_left(3)
+
+    #WHEN
 
     todos.delete('b')
 
-    todos.should_be('a', 'c')
     todos.should_have_items_left(2)
+
+    #WHEN
+
+    todos.delete('a')
+    todos.should_have_items_left(1)
+
+    #WHEN
+
+    todos.delete('c')
+    todos.should_be_empty()
