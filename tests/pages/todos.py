@@ -27,7 +27,7 @@ class Todomvc:
             browser.element('#new-todo').type(text).press_enter()
         return self
 
-    def should_be_completed(self, *texts):
+    def should_have(self, *texts):
         self.todo_list.should(have.exact_texts(*texts))
         return self
 
@@ -40,24 +40,24 @@ class Todomvc:
             .should(have.exact_text(str(amount)))
         return self
 
-    def start_editing(self, text: str, new_text: str):
+    def start_editing(self, text, new_text):
         self.todo_list.element_by(have.exact_text(text)).double_click()
         return self.todo_list.element_by(have.css_class('editing'))\
             .element('.edit').with_(set_value_by_js = True).set_value(new_text)
 
-    def edit(self, text: str, new_text: str):
+    def edit(self, text, new_text):
         self.start_editing(text, new_text).press_enter()
         return self
 
-    def edit_by_tab(self, text: str, new_text: str):
+    def edit_by_tab(self, text, new_text):
         self.start_editing(text, new_text).press_tab()
         return self
 
-    def cancel_editing(self, text: str, new_text: str):
+    def cancel_editing(self, text, new_text):
         self.start_editing(text, new_text).press_escape()
         return self
 
-    def toggle(self, text: str):
+    def toggle(self, text):
         self.todo_list.element_by(have.exact_text(text))\
             .element('.toggle').click()
         return self
@@ -66,12 +66,12 @@ class Todomvc:
         browser.element('#toggle-all').click()
         return self
 
-    def list_should_have_completed(self, *texts: str):
+    def should_have_completed(self, *texts: str):
         self.todo_list.filtered_by(have_class_completed)\
             .should(have.exact_texts(*texts))
         return self
 
-    def list_should_have_active(self, *texts: str):
+    def should_have_active(self, *texts: str):
         self.todo_list.filtered_by(have_class_completed.not_)\
             .should(have.exact_texts(*texts))
         return self
