@@ -18,8 +18,8 @@ class TodoMVC:
 
     def visit_with(self, *texts):
         self.visit()
-        for text in texts:
-            self.add(text)
+        self.add(*texts)
+        return self
 
     def add(self, *texts):
         for text in texts:
