@@ -109,13 +109,13 @@ def test_delete():
     #WHEN
 
     todos.delete('b')
-    todos.should_have_active('a', 'c')
+    todos.should_have('a', 'c')
     todos.should_have_items_left(2)
 
     #WHEN
 
     todos.delete('a')
-    todos.should_have_active('c')
+    todos.should_have('c')
     todos.should_have_items_left(1)
 
     #WHEN

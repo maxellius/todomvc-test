@@ -5,7 +5,7 @@ from selene.support.shared import browser
 have_class_completed = have.css_class('completed')
 
 
-class Todomvc:
+class TodoMVC:
     def __init__(self):
         self.todo_list = browser.all('#todo-list>li')
 
@@ -20,7 +20,6 @@ class Todomvc:
         self.visit()
         for text in texts:
             self.add(text)
-        return self
 
     def add(self, *texts):
         for text in texts:
@@ -66,12 +65,12 @@ class Todomvc:
         browser.element('#toggle-all').click()
         return self
 
-    def should_have_completed(self, *texts: str):
+    def should_have_completed(self, *texts):
         self.todo_list.filtered_by(have_class_completed)\
             .should(have.exact_texts(*texts))
         return self
 
-    def should_have_active(self, *texts: str):
+    def should_have_active(self, *texts):
         self.todo_list.filtered_by(have_class_completed.not_)\
             .should(have.exact_texts(*texts))
         return self
@@ -80,7 +79,7 @@ class Todomvc:
         browser.element('#clear-completed').click()
         return self
 
-    def delete(self, text: str):
+    def delete(self, text):
         self.todo_list.element_by(have.exact_text(text)).hover()\
             .element('.destroy').click()
         return self

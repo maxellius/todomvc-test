@@ -1,3 +1,3 @@
-from tests.pages.todos import Todomvc
+from tests.pages.todos import TodoMVC
 
-todos = Todomvc()
+todos = TodoMVC()
