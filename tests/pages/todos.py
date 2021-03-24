@@ -26,15 +26,15 @@ class TodoMVC:
             browser.element('#new-todo').type(text).press_enter()
         return self
 
-    def should_have(self, *texts):
+    def should_be(self, *texts):
         self.todo_list.should(have.exact_texts(*texts))
         return self
 
-    def should_be_empty(self):
+    def should_be_empty_list(self):
         self.todo_list.should(have.size(0))
         return self
 
-    def should_have_items_left(self, amount: int):
+    def items_left_should_be(self, amount: int):
         browser.element('#todo-count>strong')\
             .should(have.exact_text(str(amount)))
         return self
